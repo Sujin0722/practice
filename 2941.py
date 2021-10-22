@@ -1,28 +1,12 @@
-arr = list(input())
+arr = (input())
 count = 0
 
-for i in range(len(arr)):
-    if arr[i]=='c':
-        if arr[i+1] == '=':
-            ++count
-        elif arr[i+1] == '-':
-            ++count
+n = ['c=', 'c-', 'dz=', 'd-', 'lj', 'nj', 's=', 'z=']
 
-    elif arr[i]=='d':
-        if arr[i+1] == 'z':
-            ++count
-            arr.pop(i), arr.pop(i+1),arr.pop(i+2)
-            continue
-        elif arr[i+1] == '-':
-            ++count
+for i in n:
+    if i in arr:
+        arr = arr.replace(i, '0')
 
-    elif arr[i]=='l' or 'n':
-        if arr[i+1] == 'j':
-            ++count
-
-    elif arr[i]=='s' or 'z':
-        if arr[i+1] == '=':
-            ++count
-
-    arr.pop(i), arr.pop(i + 1)
-    print(arr)
+tmp = arr.count('0')
+arr = arr.replace('0', '')
+print(tmp+len(arr))
