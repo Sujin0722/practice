@@ -1,24 +1,17 @@
 import math
+import sys
 
 N = int(input())
-tmp=1
-i=1
+count = 0
 
-while tmp < N:
-    i += 1
-    tmp += i
+while N >= 0:
+    if (N%5) == 0:
+        count += int(N//5)
+        print(count)
+        break
+    N-=3
+    count+=1
 
-val = tmp - i
-
-if i%2 == 0:
-     x = N-val
-     y = i-x+1
 else:
-     x = i - (N-val)+1
-     y = N-val
-
-print("%d/%d"%(x,y))
-
-
-
+    print(-1)
 
