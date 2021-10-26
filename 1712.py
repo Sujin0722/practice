@@ -1,17 +1,20 @@
 import math
 import sys
-
-N = int(input())
-count = 0
-
-while N >= 0:
-    if (N%5) == 0:
-        count += int(N//5)
-        print(count)
-        break
-    N-=3
-    count+=1
-
-else:
-    print(-1)
+T = int(input())
+count =0
+y=0
+for i in range(T):
+    a,b = map(int, input().split())
+    distance = b-a
+    x = (math.sqrt(distance))
+    if  x % 1 == 0:
+        print(int(x*2-1))
+    elif distance <=3:
+        print(distance)
+    else:
+        x = math.trunc(x)
+        if distance<=x+(x*x):
+            print(x*2)
+        elif distance>x+(x*x):
+            print(x*2+1)
 
