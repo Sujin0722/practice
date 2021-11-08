@@ -1,22 +1,14 @@
 import sys
 
-n = int(input())
-arr = []
-check = []
+n=int(input())
+arr=list(map(int, sys.stdin.readline().split()))
+output=[-1]*n
+stack = []
 
-for i in range(n):
-    a=0
-    vps = list(input())
-    for j in vps:
-        if j=='(':
-            check.append('(')
-        elif j==')' and len(check) != 0:
-            check.pop()
-        elif j==')' and len(check) <= 0:
-            a=-1
-            break
-    if a != -1 and len(check) == 0:
-        print("YES")
-    elif a == -1 or len(check)!=0:
-        print("NO")
-    check.clear()
+stack.append(0)
+for i in range(1, n):
+    print(arr[stack[-1]], arr[i])
+    while stack and arr[stack[-1]]<arr[i]:
+        output[stack.pop()] = arr[i]
+    stack.append(i)
+print(" ".join(map(str, output)))
