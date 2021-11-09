@@ -1,31 +1,28 @@
 arr = input()
-exp=[]
+priority = {'*':3, '/':3, '+':2, '-':2}
 stack=[]
-
-def popping():
-    while len(exp)!= 0 and exp[-1] != '(':
-        stack.append(exp.pop())
-    if len(exp)!= 0 and exp[-1] == '(':
-        exp.pop()
+final = []
 
 for i in range(len(arr)):
     if arr[i].isupper():
-        stack.append(arr[i])
-        if len(exp)!=0 and (exp[-1] == '*' or exp[-1] == '/'):
-            popping()
+        final.append(arr[i])
     else:
-        if arr[i] == '+':
-            exp.append('+')
-        elif arr[i] == '-':
-            exp.append('-')
-        elif arr[i] == '*':
-            exp.append('*')
-        elif arr[i] == '/':
-            exp.append('/')
-        elif arr[i] == '(':
-            exp.append('(')
+        if arr[i] == '(':
+            stack.append('(')
+        elif arr[i] == '*' or arr[i] == '/':
+            while stack and (stack[-1] =='*' or stack[-1] == '/'):
+                final.append(stack.pop())
+            stack.append(arr[i])
+        elif arr[i] == '+' or arr[i] == '-':
+            while stack and stack[-1] !='(':
+                final.append(stack.pop())
+            stack.append(arr[i])
         elif arr[i] == ')':
-            popping()
+            while stack and stack[-1] !='(':
+                final.append(stack.pop())
+            stack.pop()
 
-popping()
-print(''.join(stack))
+while stack:
+    final.append(stack.pop())
+
+print(''.join(final))
