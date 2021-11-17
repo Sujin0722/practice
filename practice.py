@@ -1,14 +1,19 @@
-import sys
+import math
 
-n=int(input())
-arr=list(map(int, sys.stdin.readline().split()))
-output=[-1]*n
-stack = []
+n=1000000
+a=[True for i in range(n+1)]
 
-stack.append(0)
-for i in range(1, n):
-    print(arr[stack[-1]], arr[i])
-    while stack and arr[stack[-1]]<arr[i]:
-        output[stack.pop()] = arr[i]
-    stack.append(i)
-print(" ".join(map(str, output)))
+for i in range(2, 1001):
+    if a[i]:
+        for k in range(i+i, n+1, i):
+            a[k] = False
+
+while True:
+    num = int(input())
+    if num == 0: break
+    for i in range(3, len(a)):
+        if a[i] and a[num-i]:
+            print(num, "=", i, "+", num-i)
+            break
+    else:
+        print("Goldbach's conjecture is wrong.")
